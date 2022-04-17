@@ -1,0 +1,262 @@
+
+body{
+background: linear(to bottom, #198754 5%, #ffffff 10%);
+background-attachment: fixed;
+
+}
+
+#nav-tab>.active {
+
+    color: black!important;
+}
+
+.nav-item>.active {
+    background-color: #000000 !important;
+    color: rgb(255, 255, 255) !important;
+}
+.nav-link {
+    color: #000000 !important;
+}
+
+.listaravisos{
+    margin-bottom: 5%;
+}
+
+.contenido{
+
+    
+    width: 100%;
+    height: 100%;
+    
+    background-attachment: fixed;
+}
+#paginainicio{
+    width: 91.69%;
+    height: 100%;
+    background-attachment: fixed;
+    background-color: #198775 !important;
+}
+.contenido1{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    color: whitesmoke;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2%;
+}
+#paginainicio
+{
+    width: 100%;
+}
+h2 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: xxx-large;
+}
+
+.about{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    
+}	
+.logo{
+    width: 50%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: url("https://agrokasa.com/wp-content/uploads/revslider/video-media/Web-Fundo-La-Catalina-ok-HD_341.jpeg");
+    animation:transaldo 50s ease infinite;  
+}
+
+.btn-ingresar{
+    background-color: #ffffff;
+    color: #000000;
+    padding: 2%;
+    border-radius: 10%;
+    animation: latido 2s ease infinite;
+    
+}
+.btn-ingresar:hover{
+    background-color: #242424;
+    color: #f3f3f3;
+    animation:latido 10s ease infinite;
+    
+    
+}
+.salidaitem {
+    border:5px solid #07a1bd;
+}	
+@keyframes transaldo{
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+}
+    
+}
+
+
+@keyframes latido{
+    0% {
+        transform: scale(1);
+        
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+}
+    
+}
+#cerrars{
+    color: #ffffff!important;
+}
+#Avisos,#Tareas,#Salidas{
+
+    padding-left:3% ;
+
+}
+.row{
+    width: 100%;
+}
+
+#form-avisos,#form-tareas{
+    width: 30%;
+    background: #2e7596;
+    color: white;
+    padding: 1%;
+    border-radius: 10px;
+    margin-top: 0px auto;
+    border: 3px solid #535555;
+    margin-bottom: 3%;
+}
+.btn-guardar{
+    display: flex;
+    background-color: #b8eee5;
+    padding: 2%;
+    border-radius: 10%;
+    margin-top: 0px auto;
+    border: 3px solid #535555;
+    margin-top: 2%;
+}
+.btn-guardar:hover{
+    background-color: #14701c;
+    color: #ffffff;
+    animation:latido 1s ease infinite;
+    border: 1px solid #ffffff;
+    font-style: bold;
+}
+
+
+
+@media screen and (max-width: 600px){
+    .contenido{
+        
+        width: 100%;
+        height: 100%;
+        
+    }
+    .contenido1{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        color: whitesmoke;
+        background-image: url("https://agrokasa.com/wp-content/uploads/revslider/video-media/Web-Fundo-La-Catalina-ok-HD_341.jpeg");
+        animation:transaldo 50s ease infinite;
+        text-align: center;
+    }
+    .about{
+        display: flex;
+        flex-direction: column;
+    }
+    .logo
+    {
+        display: none;
+    }
+    #paginainicio{
+        width: 100%;
+        height: 100%;
+        background-attachment: fixed;
+    }
+    .btn-ingresar{
+        cursor: pointer;
+        background: linear-gradient(to bottom, #24badf 0%, #442964 100%);
+        border-radius: 10%;
+        animation: latido 2s ease infinite;
+        align-self: center;
+        color: whitesmoke;
+        
+    }
+    .btn-ingresar:hover{
+        background: linear-gradient(to bottom, #0c79ac 0%, #921515 100%);
+        color: whitesmoke;
+        
+    }
+    #avisos,#tareas,#salidas{
+        margin: 0px auto;
+        
+    }
+    .listartareas{
+    
+    }	
+    .contenido
+    {
+        width: 100%;
+        height: 100%;
+    }
+    #form-avisos,
+    #form-tareas {
+        width: 100%;
+        background: linear-gradient(to bottom, #c0bcbc 0%, #1ac3e0 100%);
+        padding: 10px;
+        border-radius: 10px;
+        border: 3px solid #535555;
+    }
+    .row{
+        width: 100%;
+        padding-inline-start: 8%;
+    }
+    @keyframes transaldo{
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+}
+        
+    }
+    @keyframes latido{
+        0% {
+            transform: scale(1);
+            
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
+
+        100%
+        {
+            transform: scale(1);    
+}
+            
+        }
+    }
