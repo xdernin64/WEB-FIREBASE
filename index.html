@@ -119,46 +119,46 @@
                 </div>
                 <div id="Avisos" class="d-none">
                     <div class="tituloavisos">
-                    <h2>Avisos OHYE</h2>
-                    <p>
-                        <a id="btn-mostrarfromavisos" class="btn btn-success" data-bs-toggle="collapse" href="#colapseavisos" role="button"
-                            aria-expanded="false" aria-controls="colapseavisos">
-                            Agregar aviso
-                        </a>
-                    </p>
-                    <div class="collapse" id="colapseavisos">
+                        <h2>Avisos OHYE</h2>
+                        <p>
+                            <a id="btn-mostrarfromavisos" class="btn btn-success" data-bs-toggle="collapse"
+                                href="#colapseavisos" role="button" aria-expanded="false" aria-controls="colapseavisos">
+                                Agregar aviso
+                            </a>
+                        </p>
+                        <div class="collapse" id="colapseavisos">
 
-                        <form id="form-avisos">
-                            <div class="form-group">
-                                <label for="titulodelaviso">Titulo</label>
-                                <input type="text" class="form-control" id="titulodelaviso" placeholder="Titulo">
-                                <label for="fechaviso">Fecha del aviso</label>
-                                <input type="date" class="form-control" id="fechaviso" name="fecha"
-                                    placeholder="Fecha del aviso">
-                                <label for="lugardelaviso">Lugar del aviso</label>
-                                <input type="text" class="form-control" id="lugardelaviso"
-                                    placeholder="Lugar del aviso">
-                                <label for="urgenciaaviso">urgencia del aviso</label>
-                                <select class="form-control" id="urgenciaaviso" name="urgenciaaviso">
-                                    <option value="Baja">Baja</option>
-                                    <option value="Media">Media</option>
-                                    <option value="Alta">Alta</option>
-                                </select>
-                                <label for="aviso">Descripción del aviso</label>
-                                <textarea class="form-control" id="aviso" name="descripcion"
-                                    placeholder="Descripción del aviso"></textarea>
+                            <form id="form-avisos">
+                                <div class="form-group">
+                                    <label for="titulodelaviso">Titulo</label>
+                                    <input type="text" class="form-control" id="titulodelaviso" placeholder="Titulo">
+                                    <label for="fechaviso">Fecha del aviso</label>
+                                    <input type="date" class="form-control" id="fechaviso" name="fecha"
+                                        placeholder="Fecha del aviso">
+                                    <label for="lugardelaviso">Lugar del aviso</label>
+                                    <input type="text" class="form-control" id="lugardelaviso"
+                                        placeholder="Lugar del aviso">
+                                    <label for="urgenciaaviso">urgencia del aviso</label>
+                                    <select class="form-control" id="urgenciaaviso" name="urgenciaaviso">
+                                        <option value="Baja">Baja</option>
+                                        <option value="Media">Media</option>
+                                        <option value="Alta">Alta</option>
+                                    </select>
+                                    <label for="aviso">Descripción del aviso</label>
+                                    <textarea class="form-control" id="aviso" name="descripcion"
+                                        placeholder="Descripción del aviso"></textarea>
 
-                                <label for="estadoaviso">Estado del aviso</label>
-                                <select class="form-control" id="estadoaviso" name="estadoaviso">
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
-                                </select>
-                                <div class="b4-form-submit">
-                                    <button type="submit" class="btn-guardar">Agregar aviso</button>
+                                    <label for="estadoaviso">Estado del aviso</label>
+                                    <select class="form-control" id="estadoaviso" name="estadoaviso">
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
+                                    <div class="b4-form-submit">
+                                        <button type="submit" class="btn-guardar">Agregar aviso</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
                     </div>
                     <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -216,12 +216,12 @@
                                     placeholder="Descripción de tarea"></textarea>
                                 <label for="subarea">Elige la subarea</label>
                                 <select class="form-control" id="subarea" name="subarea">
-                                    
+
 
                                 </select>
                                 <label for="estadotarea">Estado</label>
                                 <select class="form-control" id="estadotarea" name="estadotarea">
-                                    
+
                                     <option value="Cumplida">Cumplida</option>
                                     <option value="En proceso">En proceso</option>
                                     <option value="Pendiente">Pendiente</option>
@@ -232,7 +232,8 @@
                             </div>
                         </form>
                     </div>
-                    <select class="form-select form-select-lg mb-3" id="subareaquery" aria-label=".form-select-lg example">
+                    <select class="form-select form-select-lg mb-3" id="subareaquery"
+                        aria-label=".form-select-lg example">
                         <option selected>Selecciona</option>
                     </select>
                     <nav>
@@ -240,15 +241,15 @@
                             <button class="nav-link active" id="nav-Pendiente-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-pendiente" type="button" role="tab" aria-controls="nav-home"
                                 aria-selected="true">Pendiente</button>
-                            <button class="nav-link" id="nav-Curso-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-Curso" type="button" role="tab" aria-controls="nav-profile"
-                                aria-selected="false">En proceso</button>
+                            <button class="nav-link" id="nav-Curso-tab" data-bs-toggle="tab" data-bs-target="#nav-Curso"
+                                type="button" role="tab" aria-controls="nav-profile" aria-selected="false">En
+                                proceso</button>
                             <button class="nav-link" id="nav-Terminado-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-Terminado" type="button" role="tab" aria-controls="nav-contact"
                                 aria-selected="false">Cumplida</button>
                         </div>
                     </nav>
-                    
+
                     <ul class="row row-cols-1 row-cols-md-5 g-4 listartareas">
                     </ul>
                 </div>

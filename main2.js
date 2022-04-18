@@ -45,7 +45,9 @@ import {
     successsweetalert,
     errorsweetalert,
     questionsweetalert,
-    getavisos, guardartareas,gettareas
+    getavisos,
+    guardartareas,
+    gettareas
 } from "./funciones.js";
 
 //import
@@ -66,8 +68,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth();
-const database = getDatabase(app);
-const firestore = getFirestore(app);
 const db = getFirestore(app);
 const signupform = document.querySelector("#singup-form");
 $(document).ready(function () {
@@ -121,7 +121,7 @@ const listartareas = document.querySelector(".listartareas");
 const listaAreas = document.querySelector("#listaAreas");
 //listar sublabores
 const listarsubareas = document.querySelector("#subarea");
-const listarqsubareas=document.querySelector("#subareaquery");
+const listarqsubareas = document.querySelector("#subareaquery");
 //listar labores
 const listaLabores = document.querySelector("#listaLabores");
 const registerform = document.querySelector("#registerform");
@@ -154,6 +154,9 @@ auth.onAuthStateChanged((user) => {
             });
             usuarioactual.innerHTML = htmlusuario;
             cargarspn();
+            consultaTrabajos(1);
+            consultaAreas();
+            consulta();
             document.getElementById("nav-avisos-tab").click();
             document.getElementById("pills-activo-tab").click();
         }
@@ -235,14 +238,14 @@ auth.onAuthStateChanged((user) => {
         //SALIDAS DE USUARIOS
         var qsalidas = query(collection(db, "salidas"), orderBy("fecha", "desc"));
         async function consultaSalidas() {
-            const querySnapshot = await getDocs(qsalidas);
-            let htmlsalidas = "";
-            var fechanterior = "fin de las salidas";
-            querySnapshot.forEach((doc) => {
-                const dated = doc.data().fecha.toDate().toLocaleDateString();
+            onSnapshot(qsalidas, (querySnapshot) => {
+                let htmlsalidas = "";
+                var fechanterior = "fin de las salidas";
+                querySnapshot.forEach((doc) => {
+                    const dated = doc.data().fecha.toDate().toLocaleDateString();
 
-                if (fechanterior != dated) {
-                    const li = `
+                    if (fechanterior != dated) {
+                        const li = `
                     <hr>    
                 <h3>${dated}</h3>
                 <li class="salidar list-group-item list-group-item-action rounded-3">
@@ -251,19 +254,22 @@ auth.onAuthStateChanged((user) => {
                     <p>${doc.data().horadesalida}</p>
                 </li>
                 `;
-                    fechanterior = dated;
-                    htmlsalidas += li;
-                } else {
-                    const li = `
+                        fechanterior = dated;
+                        htmlsalidas += li;
+                    } else {
+                        const li = `
                 <li class = "salidar list-group-item list-group-item-action rounded-3" >
                     <p>${doc.data().apellidosynombres}</p>
                     <p>${doc.data().horadesalida}</p>
                 </li>
                 `;
-                    htmlsalidas += li;
-                }
+                        htmlsalidas += li;
+                    }
+                });
+                listarsalidas.innerHTML = htmlsalidas;
             });
-            listarsalidas.innerHTML = htmlsalidas;
+
+
         }
         //guardar avisos
         const avisosform = document.getElementById("form-avisos");
@@ -355,7 +361,7 @@ auth.onAuthStateChanged((user) => {
             successsweetalert("Tarea creada");
             tareasform.reset();
         });
-        
+
         //guardando salidas
         const salidasform = document.getElementById("form-salidas");
         salidasform.addEventListener("submit", (e) => {
@@ -418,17 +424,19 @@ auth.onAuthStateChanged((user) => {
             const qsubareas = query(
                 collection(db, "Areas/" + area + "/Subareas")
             );
-            const querySnapshot = await getDocs(qsubareas);
-            let htmlsubareas = '<option value="none" selected disabled hidden>Seleccione </option>;';
+            onSnapshot(qsubareas, (querySnapshot) => {
+                let htmlsubareas = '<option value="none" selected disabled hidden>Seleccione </option>;';
 
-            querySnapshot.forEach((doc) => {
-                const li = `
+                querySnapshot.forEach((doc) => {
+                    const li = `
                     <option value="${doc.data().Nombre}">${doc.data().Nombre}</option>
                     `;
-                htmlsubareas += li;
+                    htmlsubareas += li;
+                });
+                listarsubareas.innerHTML = htmlsubareas;
+                listarqsubareas.innerHTML = htmlsubareas;
             });
-            listarsubareas.innerHTML = htmlsubareas;
-            listarqsubareas.innerHTML = htmlsubareas;
+
         }
         //function para cargar labores con cambio de dropdown
         async function consultaTrabajos(area) {
@@ -443,8 +451,8 @@ auth.onAuthStateChanged((user) => {
             });
             listaLabores.innerHTML = htmltrabajos;
         }
-        
-        
+
+
         //cargando areas
         listaAreas.addEventListener("change", (event) => {
             const area = $("#listaAreas :selected").val();
@@ -452,8 +460,9 @@ auth.onAuthStateChanged((user) => {
         });
         //funcion asyncrona listando avisos
         async function avisoss(q) {
-            let htmlavisos = "";
-            const querySnapshot = await getavisos(q); {
+            onSnapshot(q, querySnapshot => {
+                let htmlavisos = "";
+
                 querySnapshot.forEach((doc) => {
                     console.log(doc.data().estado);
                     let classcard = "";
@@ -465,14 +474,13 @@ auth.onAuthStateChanged((user) => {
                         classheader = "bg-success";
                         classbody = "text-success";
                         classtittle = "text-success";
-                    }
-                    else {
+                    } else {
                         classcard = "border-secondary shadow";
                         classheader = "";
                         classbody = "";
                         classtittle = "";
                     }
-                        htmlavisos += `
+                    htmlavisos += `
                         <div class="col">
                         <div class="card ${classcard} rounded m-1">
                         <div class="card-header ${classheader}">Fecha: ${doc
@@ -498,34 +506,32 @@ auth.onAuthStateChanged((user) => {
                         `;
                 });
                 listaravisos.innerHTML = htmlavisos;
-            }
+            });
+
+
         }
         //funcion asyncrona listando tareas
         async function tareass(q) {
-            let htmltareas = "";
-            const querySnapshot = await getDocs(q);
-            querySnapshot.forEach((doc) => {
-                let classcard = "";
-                if (doc.data().estado == "Cumplida") {
-                    classcard = "text-white bg-dark shadow mb-3";
+            onSnapshot(q, querySnapshot => {
+                let htmltareas = "";
+                querySnapshot.forEach((doc) => {
+                    let classcard = "";
+                    if (doc.data().estado == "Cumplida") {
+                        classcard = "text-white bg-dark shadow mb-3";
 
-                }
-                else if (doc.data().estado == "En proceso") {
-                    classcard = "text-dark bg-info shadow mb-3";
+                    } else if (doc.data().estado == "En proceso") {
+                        classcard = "text-dark bg-info shadow mb-3";
 
-                }
-                else if (doc.data().estado == "Pendiente") {
-                    if (doc.data().urgencia == "Alta") {
-                        classcard = "text-white bg-danger shadow mb-3";
+                    } else if (doc.data().estado == "Pendiente") {
+                        if (doc.data().urgencia == "Alta") {
+                            classcard = "text-white bg-danger shadow mb-3";
+                        } else if (doc.data().urgencia == "Media") {
+                            classcard = "text-dark bg-warning shadow mb-3";
+                        } else if (doc.data().urgencia == "Baja") {
+                            classcard = "text-white bg-success shadow mb-3";
+                        }
                     }
-                    else if (doc.data().urgencia == "Media") {
-                        classcard = "text-dark bg-warning shadow mb-3";
-                    }
-                    else if (doc.data().urgencia == "Baja") {
-                        classcard = "text-white bg-success shadow mb-3";
-                    }
-                }
-                htmltareas += `
+                    htmltareas += `
                 <div class="col">
                 <div class="card ${classcard} rounded m-1 p-2">
                 <div class="card-header>Prioridad: ${doc.data().urgencia}
@@ -554,10 +560,10 @@ auth.onAuthStateChanged((user) => {
                 </div>
                 </div>
                 `;
+                });
+                listartareas.innerHTML = htmltareas;
             });
-            listartareas.innerHTML = htmltareas;
         }
-
         //navegacion de avisos
         document
             .getElementById("nav-avisos-tab")
@@ -569,9 +575,9 @@ auth.onAuthStateChanged((user) => {
             });
         document.getElementById("pills-activo-tab").addEventListener("click", (event) => {
             let idarea = document.querySelector("#areactual").textContent;
-            let q = query(collection(db, "Avisos"), where("idarea", "==", idarea),where("estado","==","Activo"));
+            let q = query(collection(db, "Avisos"), where("idarea", "==", idarea), where("estado", "==", "Activo"));
             avisoss(q);
-            
+
 
         });
         document.getElementById("pills-inactivo-tab").addEventListener("click", (event) => {
@@ -579,31 +585,30 @@ auth.onAuthStateChanged((user) => {
             let q = query(collection(db, "Avisos"), where("idarea", "==", idarea), where("estado", "==", "Inactivo"));
             avisoss(q);
         });
-        
+
         //navegacion de tareas
         async function cargarspn() {
             var iddarea = document.querySelector("#idareactual").textContent;
             consultaSubAreas(iddarea);
         }
-        
+
         document
             .getElementById("nav-tareas-tab")
             .addEventListener("click", (event) => {
                 document.getElementById("Salidas").classList.add("d-none");
                 document.getElementById("Avisos").classList.add("d-none");
                 document.getElementById("Tareas").classList.remove("d-none");
-                
+
             });
         document.getElementById("subareaquery").addEventListener("change", (event) => {
             document.getElementById("nav-Pendiente-tab").click();
         });
         document.getElementById("nav-Pendiente-tab").addEventListener("click", (event) => {
-        let subarea = $("#subareaquery :selected").val();
-        let idarea = document.querySelector("#areactual").textContent;
-        let q = query(collection(db, "Tareas"), where("idarea", "==", idarea), where("subarea", "==", subarea),where("estado","==","Pendiente"));
+            let subarea = $("#subareaquery :selected").val();
+            let idarea = document.querySelector("#areactual").textContent;
+            let q = query(collection(db, "Tareas"), where("idarea", "==", idarea), where("subarea", "==", subarea), where("estado", "==", "Pendiente"));
             tareass(q);
-            //count click
-    
+            //count click    
         });
         document.getElementById("nav-Curso-tab").addEventListener("click", (event) => {
             let subarea = $("#subareaquery :selected").val();
@@ -622,7 +627,7 @@ auth.onAuthStateChanged((user) => {
         document
             .getElementById("nav-salidas-tab")
             .addEventListener("click", (event) => {
-                
+
 
                 consultaSalidas();
 
@@ -632,10 +637,8 @@ auth.onAuthStateChanged((user) => {
             });
 
         currentuser();
-        consultaTrabajos(1);
-        consultaAreas();
-        consulta();
-        
+
+
     } else {
         document.getElementById("menunav").classList.add("d-none");
         document.getElementById("cerrars").classList.add("d-none");

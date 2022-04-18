@@ -53,6 +53,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export function tiemporeal(queryfunction, funcion) {
+    
     var realtime = onSnapshot(queryfunction, (snapshot) => {
         snapshot.docChanges().forEach((change) => {
             if (change.type === "added") {
@@ -67,6 +68,7 @@ export function tiemporeal(queryfunction, funcion) {
         });
     });
 }
+
 //guardar salida
 export const guardarsalidas = (apellidosynombres, codigo, docid, fecha, horadesalida, horasextra, observacion, uid,idarea) => {
     setDoc(doc(db, "salidas", docid), {
@@ -111,6 +113,9 @@ export const guardartareas = (autor, uid, idarea, titulotarea,fechacreaciontarea
         estado,
         subarea
     });
+}
+export {
+    onSnapshot,collection,db
 }
 
 
