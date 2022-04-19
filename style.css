@@ -162,6 +162,9 @@ h2 {
 
 
 @media screen and (max-width: 600px){
+    body{
+        width: 100%;
+    }
     .contenido{
         
         width: 100%;
@@ -228,6 +231,9 @@ h2 {
     .row{
         width: 100%;
         padding-inline-start: 8%;
+    }
+    .listarsalidas{
+        width: 100%;
     }
     @keyframes transaldo{
         0% {
